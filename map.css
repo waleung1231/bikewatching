@@ -1,0 +1,112 @@
+html, body {
+    margin: 0;
+    padding: 5;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    gap: 1em;
+    align-items: baseline;
+    padding: 1em;
+}
+
+header label {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+header .time-display {
+    position: relative;
+    width: 5em;
+    height: 1.2em;
+}
+
+header time {
+    position: absolute;
+    left: 0;
+}
+
+header em {
+    position: absolute;
+    left: 0;
+    color: #666;
+    font-style: italic;
+}
+
+:root {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+}
+
+#map svg circle, .legend > div {
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+}
+     
+#map {
+    flex: 1;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+}
+
+#map svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#map svg circle {
+    pointer-events: auto;
+    cursor: pointer;
+    transition: fill-opacity 0.2s;
+    fill: var(--color);
+    fill-opacity: 0.6;
+    stroke: white;
+    stroke-width: 1;
+}
+
+#map svg circle:hover {
+    fill-opacity: 0.8;
+}
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    display: flex;
+    gap: 1em;
+}
+
+.legend > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.legend > div::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: var(--color);
+}
