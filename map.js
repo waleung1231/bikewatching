@@ -122,8 +122,8 @@ function updateVisualization() {
             if (d.totalTraffic === 0) return 0.5; // Default to balanced when no traffic
             return stationFlow(d.departures / d.totalTraffic);
         });
-
-    // Update tooltips
+    
+    // Remove existing titles and add new ones
     circles.select('title').remove();
     circles.append('title')
         .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
